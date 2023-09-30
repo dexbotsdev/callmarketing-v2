@@ -20,10 +20,8 @@ let config = null;
     }
     config = JSON.parse(data);
 
-    const tsA = new TelegramAccountService(config, eventEmitter);
-    
-     tsA.subscribe(); 
-
+    const tsA = new TelegramAccountService(config, eventEmitter); 
+ 
  
     eventEmitter.on('newListener', (event: string, listener: any) => {
       logger.info(`Added Signal Repeater Server ${event.toUpperCase()} listener.`);

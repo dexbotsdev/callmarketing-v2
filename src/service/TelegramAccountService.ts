@@ -50,12 +50,14 @@ class TelegramAccountService {
         try {
             const dialogs = await this.client.getDialogs();
 
+ 
+
             dialogs.forEach((element: any) => {
 
                 if (element.entity?.className === 'Channel') { 
                     if (Number(element.dialog.peer?.channelId) 
-                    &&( this.channels.includes(element?.entity?.username) || this.channels.includes(element?.entity?.title))
-                    &&( this.alphaChannels.includes(element?.entity?.username) || this.alphaChannels.includes(element?.entity?.title))
+                    &&( this.channels.includes(element?.entity?.username) || this.channels.includes(element?.entity?.title) 
+                    ||   this.alphaChannels.includes(element?.entity?.username) || this.alphaChannels.includes(element?.entity?.title))
                 ) {
                         this.chatIds.push(Number(element.dialog?.peer?.channelId));
                         this.channelMaps.push({
@@ -65,8 +67,8 @@ class TelegramAccountService {
                             isAlpha: this.alphaChannels.includes(element?.name)
                         })
                     }  
-                } else if (element.entity?.className === 'Chat'    &&( this.channels.includes(element?.entity?.username) || this.channels.includes(element?.entity?.title))
-                &&( this.alphaChannels.includes(element?.entity?.username) || this.alphaChannels.includes(element?.entity?.title))
+                } else if (element.entity?.className === 'Chat'    &&( this.channels.includes(element?.entity?.username) || this.channels.includes(element?.entity?.title) 
+                ||   this.alphaChannels.includes(element?.entity?.username) || this.alphaChannels.includes(element?.entity?.title))
             ) {
                     this.chatIds.push(Number(element.entity?.id));
                     this.channelMaps.push({
@@ -92,6 +94,9 @@ class TelegramAccountService {
             });
 
 
+
+            console.log(this.channelMaps.length);
+
             if (this.channelMaps.length > 0) {
 
                 this.channelMaps.forEach(async (element: any) => {
@@ -105,10 +110,8 @@ class TelegramAccountService {
 
                     const chnl = await Channels.upsert(cnl).then((result) => { console.log(result) });
                 });
-
-                // console.log(this.publishTo );
-                // console.log(this.channelMaps );
-                // console.log(this.chatIds );
+ 
+                 await this.subscribe();
 
             }
 
@@ -126,6 +129,10 @@ class TelegramAccountService {
 
     initClient = async () => {
 
+
+        console.log("starting" );
+
+
         await this.client.start({
             phoneNumber: async () => await text("Please enter your number: "),
             password: async () => await text("Please enter your password: "),
@@ -135,8 +142,10 @@ class TelegramAccountService {
         });
 
         const me = await this.client.getMe();
+        console.log("starting me" );
 
         if (me) {
+            console.log("starting getGroupChatIdByName" );
 
             this.getGroupChatIdByName();
         }
@@ -144,7 +153,8 @@ class TelegramAccountService {
     }
 
 
-    subscribe = async () => {
+    subscribe = async () => { 
+        console.log("starting   subscribe" ); 
 
          this.client.addEventHandler(async (event: any) => {
             if (event?.message) {
