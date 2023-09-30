@@ -1,0 +1,152 @@
+import { Channels } from "../database/db";
+import moment from "moment";
+
+let formatter = Intl.NumberFormat('en', { notation: 'compact' });
+
+export const NewMessageFormat =(commandDetail: any,totalCallsCount:number)=>{ 
+    
+return `
+$${commandDetail.tokenSymbol} <b>Call ${totalCallsCount} :</b> <b> <a href="https://t.me/${commandDetail.channelName}/${commandDetail.callerPostId}">${commandDetail.callerTG}</a></b>
+
+🟢 Token : $${commandDetail.tokenSymbol} || ${commandDetail.tokenName}
+
+📊 Real-Time MCap:  $${formatter.format(commandDetail.tokenMC)}
+🔫 <a href="https://t.me/${commandDetail.channelName}/${commandDetail.callerPostId}">${commandDetail.callerTG} </a>: Called @ ${formatter.format(commandDetail.tokenMC)}
+
+⚠ CA : ${commandDetail.tokenAddress}
+
+📈 <a href="https://dexspy.io/eth/token/${commandDetail.tokenAddress}" >DexS</a>
+🎯 Snipe:  <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a> |  <a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
+
+CALL Alerts from @marketingalert
+`;
+}
+
+
+const listoftgcalls=async (commandDetail:any,logs:any)=>{
+ 
+    let out='';
+    let cnt=1;
+    if(logs.length === 0 && !commandDetail.isAlpha){
+ 
+        out =out+`<b>${cnt++}. <a href="https://t.me/${commandDetail.channelName}/${commandDetail.callerPostId}">${commandDetail.callerTG}</a></b>
+🟦 Market Cap : <b>${formatter.format(commandDetail.tokenMC)} || ROI: 0 %</b> `;
+
+    }
+    else 
+   
+    await logs.forEach((item: any)=>{
+       
+        if(item.isAlpha){
+            out =out+`<b>${cnt++}. ALPHACALL</b>
+🟦 Market Cap : <b>${formatter.format(item.mcap)} || ROI: ${item.athROI}%</b> 
+`;
+        } else 
+        out =out+`<b>${cnt++}. <a href="https://t.me/${item.channelName}/${item.callerPostId}">${item.callerTG}</a></b>
+🟦 Market Cap : <b>${formatter.format(item.mcap)} || ROI: ${item.athROI}%</b> 
+
+`;
+ 
+ 
+    })
+ 
+    return out;
+
+    
+}
+
+
+export const AllCallsMessage =async (commandDetail: any, tokenLogs:any)=>{ 
+    
+    let cnt = tokenLogs.calls.length >0 ? tokenLogs.calls.length:1;
+    return  `
+🚀 <b>$${commandDetail.tokenSymbol} TOTAL MARKETING : ${cnt} </b>
+
+💳 <b> ALPHA CALLS COUNT
+
+TOTAL CALLS || MCAP
+
+${await listoftgcalls(commandDetail,tokenLogs.calls)}   
+ 
+<b>🚀 Token Name :</b>  $${commandDetail.tokenName} (${commandDetail.tokenSymbol})
+<b>📌 CA :</b>  ${commandDetail.tokenAddress} 
+<b>📈 Chart :<a href="https://dexspy.io/eth/token/${commandDetail.tokenAddress}">DexS</a></b>
+    
+🔎 Scan: <a href="https://honeypot.is/ethereum?address=${commandDetail.tokenAddress}">HpScan</a> 
+🎯 Snipe:  <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a> |  <a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
+
+ <b>Call Alerts from @marketingalert</b>
+`;
+} 
+
+
+export const UpdateFromNewCall =(commandDetail: any,totalCallsCount:number)=>{  
+    
+    return `
+    $${commandDetail.tokenSymbol} <b>Call ${totalCallsCount} :</b> <b> <a href="https://t.me/${commandDetail.channelName}/${commandDetail.callerPostId}">${commandDetail.callerTG}</a></b>
+
+🟢 Token : $${commandDetail.tokenSymbol} || ${commandDetail.tokenName}
+
+📊 Real-Time MCap:  $${formatter.format(commandDetail.tokenMC)}
+ 
+⚠ CA : ${commandDetail.tokenAddress}
+
+📈 <a href="https://dexspy.io/eth/token/${commandDetail.tokenAddress}" >DexS</a>
+
+🔎 Scan: <a href="https://honeypot.is/ethereum?address=${commandDetail.tokenAddress}">HpScan</a> 
+🎯 Snipe:  <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a> |  <a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
+
+<b>Call Alerts from @marketingalert</b>
+`;
+    }
+    
+    
+ 
+
+
+export const UpdateFromAddonCall =(commandDetail: any, totalCallsCount:number)=>{  
+    
+    return `
+$${commandDetail.tokenSymbol} <b>Call ${totalCallsCount} :</b> <b> <a href="https://t.me/${commandDetail.channelName}/${commandDetail.callerPostId}">${commandDetail.callerTG}</a></b>
+
+
+🟢 Token : $${commandDetail.tokenSymbol} || ${commandDetail.tokenName}
+
+📊 Real-Time MCap:  $${formatter.format(commandDetail.tokenMC)}
+
+⚠ CA : ${commandDetail.tokenAddress}
+
+📈 <a href="https://dexspy.io/eth/token/${commandDetail.tokenAddress}" >DexS</a>
+🎯 Snipe:  <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a> |  <a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
+    
+Call Alerts from @marketingalert
+    `;
+    }
+     
+
+
+  const  getCallCountBalls = (cnt: number) => {
+
+        let disp = '';
+        for (var i = 1; i <= cnt; i++) {
+            disp = disp + '🟢'
+            if (i % 3 === 0) disp = disp + '||';
+        }
+        return disp;
+    }
+
+    const getCallerLines=(calls: any)=>{
+
+        let outcome = '     ';
+
+        for (var i = 0; i < calls.length; i++) {
+
+            outcome += `    <b><u>${i + 1}. ${calls[i].callerTG}</u></b>
+    
+            🟦 <b> Market Cap : $${formatter.format(calls[i].mcap)} || ROI: ${calls[i].athROI}%</b>
+    
+    ` 
+        }
+
+        return outcome;
+    }
