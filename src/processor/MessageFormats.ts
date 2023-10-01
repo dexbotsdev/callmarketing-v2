@@ -13,7 +13,7 @@ $${commandDetail.tokenSymbol} <b>Call ${totalCallsCount} :</b> <b> <a href="http
 📊 Real-Time MCap:  $${formatter.format(commandDetail.tokenMC)}
 🔫 <a href="https://t.me/${commandDetail.channelName}/${commandDetail.callerPostId}">${commandDetail.callerTG} </a>: Called @ ${formatter.format(commandDetail.tokenMC)}
 
-⚠ CA : <code>${commandDetail.tokenAddress}</code>
+<b>📌 CA :</b>  <code>${commandDetail.tokenAddress}</code>
 
 📈 <a href="${commandDetail.url}" >DexS</a>
 🏹 Snipe:  <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a> |  <a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
