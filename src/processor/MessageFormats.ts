@@ -16,7 +16,7 @@ $${commandDetail.tokenSymbol} <b>Call ${totalCallsCount} :</b> <b> <a href="http
 ⚠ CA : <code>${commandDetail.tokenAddress}</code>
 
 📈 <a href="${commandDetail.url}" >DexS</a>
-🎯 Snipe:  <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a> |  <a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
+🏹 Snipe:  <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a> |  <a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
 
 CALL Alerts from @marketingalert
 `;
@@ -72,8 +72,8 @@ ${await listoftgcalls(commandDetail,tokenLogs.calls)}
 <b>📌 CA :</b>  <code>${commandDetail.tokenAddress}</code>
 <b>📈 Chart :<a href="${commandDetail.url}">DexS</a></b>
     
-🔎 Scan: <a href="https://honeypot.is/ethereum?address=${commandDetail.tokenAddress}">HpScan</a> 
-🎯 Snipe:  <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a> |  <a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
+🧉 Scan: <a href="https://honeypot.is/ethereum?address=${commandDetail.tokenAddress}">HpScan</a> 
+🏹 Snipe:  <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a> |  <a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
 
  <b>Call Alerts from @marketingalert</b>
 `;
@@ -93,8 +93,8 @@ export const UpdateFromNewCall =(commandDetail: any,totalCallsCount:number)=>{
 
 📈 <a href="${commandDetail.url}" >DexS</a>
 
-🔎 Scan: <a href="https://honeypot.is/ethereum?address=${commandDetail.tokenAddress}">HpScan</a> 
-🎯 Snipe:  <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a> |  <a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
+🧉 Scan: <a href="https://honeypot.is/ethereum?address=${commandDetail.tokenAddress}">HpScan</a> 
+🏹 Snipe:  <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a> |  <a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
 
 <b>Call Alerts from @marketingalert</b>
 `;
@@ -117,8 +117,8 @@ $${commandDetail.tokenSymbol} <b>Call ${totalCallsCount} :</b> <b> <a href="http
 ⚠ CA : ${commandDetail.tokenAddress}
 
 📈 <a href="${commandDetail.url}" >DexS</a>
-🔎 Scan: <a href="https://honeypot.is/ethereum?address=${commandDetail.tokenAddress}">HpScan</a> 
-🎯 Snipe:  <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a> |  <a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
+🧉 Scan: <a href="https://honeypot.is/ethereum?address=${commandDetail.tokenAddress}">HpScan</a> 
+🏹 Snipe:  <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a> |  <a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
     
 Call Alerts from @marketingalert
     `;
