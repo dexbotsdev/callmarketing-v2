@@ -15,7 +15,7 @@ let config = null;
 
   fs.readFile('./client.config.json', 'utf8', (error, data) => {
     if (error) {
-      console.log(error);
+    //console.log(error);
       return;
     }
     config = JSON.parse(data);
@@ -29,7 +29,7 @@ let config = null;
 
     eventEmitter.on('newSignal', async (tradeSignal: any) => {
       logger.info('Recieved ');
-      console.log(tradeSignal);
+    //console.log(tradeSignal);
 
      const oldSignal = await  TokenCalls.findOne({where :{
         tokenAddress : tradeSignal.tokenAddress,
@@ -60,7 +60,7 @@ let config = null;
       logger.info('Recieved 24 Hourly Stats --   '  );
        
 
-      console.log(message);
+    //console.log(message);
 
        
 

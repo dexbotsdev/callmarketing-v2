@@ -212,7 +212,7 @@ class TelegramAccountService {
 
     sendTokenCallMessage = async (tradeSignal: string) => {
 
-        const botlinkedchannel = await this.client.getInputEntity('marketingalert');
+        const botlinkedchannel = await this.client.getInputEntity(this.publishChannel);
 
         let tradingSignal = JSON.parse(tradeSignal);
         this.client.setParseMode("html"); 
@@ -235,7 +235,9 @@ class TelegramAccountService {
             
         });
 
-        console.log(tokenStats);
+       // console.log(tokenStats);
+        console.log(totalCallsCount);
+        console.log(currTGCallsCount);
 
         let message ='';
 
@@ -247,20 +249,30 @@ class TelegramAccountService {
             tradingSignal.minCallercallerPostId = tokenStats.calls[0].callerPostId
         }
         if(totalCallsCount ===1 && currTGCallsCount===1 && !tradingSignal.isAlpha){
+
+                console.log('Calling NEW MESSAGE since only 1 Record ')
+
             message = NewMessageFormat(tradingSignal,totalCallsCount);
         }
         else if(totalCallsCount > 1 && currTGCallsCount === 1 && !tradingSignal.isAlpha){
             
+            console.log('Calling NEW MESSAGE after 1 Record ')
+
+
             message = UpdateFromNewCall(tradingSignal,totalCallsCount);
         }
 
-        if(!tradingSignal.isAlpha)
+        if(totalCallsCount >1 && currTGCallsCount>1 && !tradingSignal.isAlpha)
              {
+                console.log('Calling AddOnCall MESSAGE after 1 Record ')
+
                 message = UpdateFromAddonCall(tradingSignal,currTGCallsCount);
             
              
             }
 
+            if(!tradingSignal.isAlpha)
+            await this.client.sendMessage(botlinkedchannel,{message:message, parseMode:'html',linkPreview:false});
 
 
             const tradeLogMessage = await AllCallsMessage(JSON.parse(tradeSignal),tokenStats);
@@ -274,8 +286,7 @@ class TelegramAccountService {
 
         const oldMessageId = oldLogsOpenData?.dataValues?.lastMessageId ? oldLogsOpenData?.dataValues?.lastMessageId : 0;
 
-        console.log(tradeLogMessage);
-
+ 
         if(oldMessageId ===0 ){
             // const resultLog  = await this.client.invoke(
             //     new Api.messages.SendMessage({
@@ -291,8 +302,7 @@ class TelegramAccountService {
     
             const resultLogData = JSON.parse(JSON.stringify(resultLog));
            
-            console.log(resultLogData);
-    
+     
          await UpdateLogs.create({lastMessageId : resultLogData.id, tokenAddress:tokenAddress});
     
         } else {
@@ -300,10 +310,10 @@ class TelegramAccountService {
 
 
         console.log(botlinkedchannel);
-
-        const resultX = await this.client.sendMessage(botlinkedchannel,{
+         if(!tradingSignal.isAlpha){ 
+             await this.client.sendMessage(botlinkedchannel,{
             replyTo:oldMessageId,
-            message:message, parseMode:'html',linkPreview:false});
+            message:message, parseMode:'html',linkPreview:false});}
 
         // const resultX  = await this.client.invoke(
         //     new Api.messages.SendMessage({
@@ -315,12 +325,7 @@ class TelegramAccountService {
         //     })
         // );
 
-        console.log('RESULT HERE ');
-
-        const result = JSON.parse(JSON.stringify(resultX));
-       
-        console.log(tokenStats);
-
+        
 
        const resultLog =await this.client.editMessage(botlinkedchannel,{message: oldMessageId,text:tradeLogMessage, parseMode:'html',linkPreview:false});
 
@@ -335,8 +340,7 @@ class TelegramAccountService {
     
             const resultLogData = JSON.parse(JSON.stringify(resultLog));
            
-            console.log(resultLogData );
-
+ 
              await UpdateLogs.destroy({where : { tokenAddress:tokenAddress}});
 
            await UpdateLogs.create({lastMessageId : resultLogData.id, tokenAddress:tokenAddress});

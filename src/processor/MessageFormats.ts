@@ -6,19 +6,18 @@ let formatter = Intl.NumberFormat('en', { notation: 'compact' });
 export const NewMessageFormat =(commandDetail: any,totalCallsCount:number)=>{ 
     
 return `
-$${commandDetail.tokenSymbol} <b>Call ${totalCallsCount} :</b> <b> <a href="https://t.me/${commandDetail.channelName}/${commandDetail.callerPostId}">${commandDetail.callerTG}</a></b>
+$${commandDetail.tokenSymbol} <b>New Call :</b> <b> <a href="https://t.me/${commandDetail.channelName}/${commandDetail.callerPostId}">${commandDetail.callerTG}</a></b>
 
 🟢 Token : $${commandDetail.tokenSymbol} || ${commandDetail.tokenName}
 
 📊 Real-Time MCap:  $${formatter.format(commandDetail.tokenMC)}
 🔫 <a href="https://t.me/${commandDetail.channelName}/${commandDetail.callerPostId}">${commandDetail.callerTG} </a>: Called @ ${formatter.format(commandDetail.tokenMC)}
 
-<b>📌 CA :</b>  <code>${commandDetail.tokenAddress}</code>
+📈 <a href="${commandDetail.url}">Chart</a> 
+    
+⭐ <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a>      🌟<a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
 
-📈 <a href="${commandDetail.url}" >DexS</a>
-🏹 Snipe:  <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a> |  <a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
-
-CALL Alerts from @marketingalert
+Call Alerts from @marketingalerts
 `;
 }
 
@@ -62,20 +61,20 @@ export const AllCallsMessage =async (commandDetail: any, tokenLogs:any)=>{
     return  `
 🚀 <b>$${commandDetail.tokenSymbol} TOTAL MARKETING : ${cnt} </b>
 
-💳 <b> ALPHA CALLS COUNT            
+💳 Alpha Calls : ${getAlphaCount(tokenLogs.calls)} ${getCallCountBalls(tokenLogs.calls)}            
 
 TOTAL CALLS || MCAP
 
 ${await listoftgcalls(commandDetail,tokenLogs.calls)}   
  
-<b>🚀 Token Name :</b>  $${commandDetail.tokenName} (${commandDetail.tokenSymbol})
-<b>📌 CA :</b>  <code>${commandDetail.tokenAddress}</code>
-<b>📈 Chart :<a href="${commandDetail.url}">DexS</a></b>
-    
-🧉 Scan: <a href="https://honeypot.is/ethereum?address=${commandDetail.tokenAddress}">HpScan</a> 
-🏹 Snipe:  <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a> |  <a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
+<b>🚀 Token :</b>  $${commandDetail.tokenName} (${commandDetail.tokenSymbol})
+<code>${commandDetail.tokenAddress}</code>
 
- <b>Call Alerts from @marketingalert</b>
+📈 <a href="${commandDetail.url}">Chart</a> 
+    
+⭐ <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a>      🌟<a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
+
+Call Alerts from @marketingalerts
 `;
 } 
 
@@ -83,7 +82,7 @@ ${await listoftgcalls(commandDetail,tokenLogs.calls)}
 export const UpdateFromNewCall =(commandDetail: any,totalCallsCount:number)=>{  
     
     return `
-    $${commandDetail.tokenSymbol} <b>Call ${totalCallsCount} :</b> <b> <a href="https://t.me/${commandDetail.channelName}/${commandDetail.callerPostId}">${commandDetail.callerTG}</a></b>
+    $${commandDetail.tokenSymbol} <b>New Call :</b>  <b> <a href="https://t.me/${commandDetail.channelName}/${commandDetail.callerPostId}">${commandDetail.callerTG}</a></b>
 
 🟢 Token : $${commandDetail.tokenSymbol} || ${commandDetail.tokenName}
 
@@ -91,12 +90,11 @@ export const UpdateFromNewCall =(commandDetail: any,totalCallsCount:number)=>{
  
 ⚠ CA : <code>${commandDetail.tokenAddress}</code>
 
-📈 <a href="${commandDetail.url}" >DexS</a>
+📈 <a href="${commandDetail.url}">Chart</a> 
+    
+⭐ <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a>      🌟<a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
 
-🧉 Scan: <a href="https://honeypot.is/ethereum?address=${commandDetail.tokenAddress}">HpScan</a> 
-🏹 Snipe:  <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a> |  <a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
-
-<b>Call Alerts from @marketingalert</b>
+Call Alerts from @marketingalerts
 `;
     }
     
@@ -107,7 +105,7 @@ export const UpdateFromNewCall =(commandDetail: any,totalCallsCount:number)=>{
 export const UpdateFromAddonCall =(commandDetail: any, totalCallsCount:number)=>{  
     
     return `
-$${commandDetail.tokenSymbol} <b>Call ${totalCallsCount} :</b> <b> <a href="https://t.me/${commandDetail.channelName}/${commandDetail.callerPostId}">${commandDetail.callerTG}</a></b>
+$${commandDetail.tokenSymbol} <b>New Call :</b>  <b> <a href="https://t.me/${commandDetail.channelName}/${commandDetail.callerPostId}">${commandDetail.callerTG}</a></b>
 
 
 🟢 Token : $${commandDetail.tokenSymbol} || ${commandDetail.tokenName}
@@ -116,22 +114,39 @@ $${commandDetail.tokenSymbol} <b>Call ${totalCallsCount} :</b> <b> <a href="http
 
 ⚠ CA : ${commandDetail.tokenAddress}
 
-📈 <a href="${commandDetail.url}" >DexS</a>
-🧉 Scan: <a href="https://honeypot.is/ethereum?address=${commandDetail.tokenAddress}">HpScan</a> 
-🏹 Snipe:  <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a> |  <a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
+📈 <a href="${commandDetail.url}">Chart</a> 
     
-Call Alerts from @marketingalert
+⭐ <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a>      🌟<a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
+ 
+Call Alerts from @marketingalerts
     `;
     }
      
+    const  getAlphaCount= (calls : any) => {
 
 
-  const  getCallCountBalls = (cnt: number) => {
+        console.log("********************* IN Get Alpha Count Method ")
+         let disp = 0;
+        for (var i = 0; i < calls.length; i++) {
+ 
+            if(Number(calls[i].isAlpha) === 1 ){
+            disp = disp + 1
+ 
+        }
+    }
+
+
+        return disp;
+    }
+
+  const  getCallCountBalls = (calls : any) => {
 
         let disp = '';
-        for (var i = 1; i <= cnt; i++) {
+        for (var i = 0; i < calls.length; i++) {
+
+            if(calls[i].isAlpha){
             disp = disp + '🟢'
-            if (i % 3 === 0) disp = disp + '||';
+            if ((i+1) % 3 === 0) disp = disp + '||';}
         }
         return disp;
     }

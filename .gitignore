@@ -1320,3 +1320,4 @@ dist/service/parsers/MadPepeCalls.js
 dist/service/parsers/nomsgems.js
 dist/types/type.js
 dist/utils/index.js
+local.config.json
