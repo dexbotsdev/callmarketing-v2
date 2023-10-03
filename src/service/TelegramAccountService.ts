@@ -95,7 +95,7 @@ class TelegramAccountService {
 
 
 
-            console.log(this.channelMaps.length);
+          //console.log(this.channelMaps.length);
 
             if (this.channelMaps.length > 0) {
 
@@ -118,7 +118,7 @@ class TelegramAccountService {
 
            
         } catch (error) {
-            console.log(error)
+          //console.log(error)
             throw new Error(`Group not found.`);
 
         } finally {
@@ -130,7 +130,7 @@ class TelegramAccountService {
     initClient = async () => {
 
 
-        console.log("starting" );
+      //console.log("starting" );
 
 
         await this.client.start({
@@ -142,10 +142,10 @@ class TelegramAccountService {
         });
 
         const me = await this.client.getMe();
-        console.log("starting me" );
+      //console.log("starting me" );
 
         if (me) {
-            console.log("starting getGroupChatIdByName" );
+          //console.log("starting getGroupChatIdByName" );
 
             this.getGroupChatIdByName();
         }
@@ -154,23 +154,23 @@ class TelegramAccountService {
 
 
     subscribe = async () => { 
-        console.log("starting   subscribe" ); 
+      //console.log("starting   subscribe" ); 
 
          this.client.addEventHandler(async (event: any) => {
             if (event?.message) {
                 // 
-              //  console.log(this.chatIds); 
+              ////console.log(this.chatIds); 
 
                 const chatId = event.message?.peerId?.channelId ? event.message?.peerId?.channelId : event.message?.peerId?.chatId;
 
                 if (this.chatIds.includes(Number(chatId)) ) {
 
-                    console.log('------------------------------------------------------');
-                    console.log(' Message from ' + this.channelMaps.find((item) => item.id === Number(chatId)).title);
+                  //console.log('------------------------------------------------------');
+                  //console.log(' Message from ' + this.channelMaps.find((item) => item.id === Number(chatId)).title);
                     let data = await processMessage(event.message);
                     let signal = {};
-                  //  console.log(data);
-                    console.log('------------------------------------------------------');
+                  ////console.log(data);
+                  //console.log('------------------------------------------------------');
 
 
                     
@@ -224,7 +224,7 @@ class TelegramAccountService {
         let currTGCallsCount =0;
         let totalCallsCount =tokenStats.callCount;
 
-        console.log(tokenStats);
+      //console.log(tokenStats);
 
         tokenStats.calls.forEach(element => { 
             if(element.callerTG === callerTG){ 
@@ -236,8 +236,8 @@ class TelegramAccountService {
         });
 
        // console.log(tokenStats);
-        console.log(totalCallsCount);
-        console.log(currTGCallsCount);
+      //console.log(totalCallsCount);
+      //console.log(currTGCallsCount);
 
         let message ='';
 
@@ -250,23 +250,23 @@ class TelegramAccountService {
         }
         if(totalCallsCount ===1 && currTGCallsCount===1 && !tradingSignal.isAlpha){
 
-                console.log('Calling NEW MESSAGE since only 1 Record ')
+              //console.log('Calling NEW MESSAGE since only 1 Record ')
 
             message = NewMessageFormat(tradingSignal,totalCallsCount);
         }
         else if(totalCallsCount > 1 && currTGCallsCount === 1 && !tradingSignal.isAlpha){
             
-            console.log('Calling NEW MESSAGE after 1 Record ')
+          //console.log('Calling NEW MESSAGE after 1 Record ')
 
 
-            message = UpdateFromNewCall(tradingSignal,totalCallsCount);
+            message = NewMessageFormat(tradingSignal,totalCallsCount);
         }
 
         if(totalCallsCount >1 && currTGCallsCount>1 && !tradingSignal.isAlpha)
              {
-                console.log('Calling AddOnCall MESSAGE after 1 Record ')
+              //console.log('Calling AddOnCall MESSAGE after 1 Record ')
 
-                message = UpdateFromAddonCall(tradingSignal,currTGCallsCount);
+                message = NewMessageFormat(tradingSignal,currTGCallsCount);
             
              
             }
@@ -309,7 +309,7 @@ class TelegramAccountService {
             try{
 
 
-        console.log(botlinkedchannel);
+      //console.log(botlinkedchannel);
          if(!tradingSignal.isAlpha){ 
              await this.client.sendMessage(botlinkedchannel,{
             replyTo:oldMessageId,
@@ -346,7 +346,7 @@ class TelegramAccountService {
            await UpdateLogs.create({lastMessageId : resultLogData.id, tokenAddress:tokenAddress});
     
         }catch(err){
-            console.log(err);
+          //console.log(err);
         }
         }
 

@@ -10,12 +10,13 @@ $${commandDetail.tokenSymbol} <b>New Call :</b> <b> <a href="https://t.me/${comm
 
 🟢 Token : $${commandDetail.tokenSymbol} || ${commandDetail.tokenName}
 
-📊 Real-Time MCap:  $${formatter.format(commandDetail.tokenMC)}
-🔫 <a href="https://t.me/${commandDetail.channelName}/${commandDetail.callerPostId}">${commandDetail.callerTG} </a>: Called @ ${formatter.format(commandDetail.tokenMC)}
+🚀 MCap:  $${formatter.format(commandDetail.tokenMC)}
 
-📈 <a href="${commandDetail.url}">Chart</a> 
-    
-⭐ <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a>      🌟<a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
+<code>${commandDetail.tokenAddress}</code>
+
+
+📈 <a href="${commandDetail.url}">Chart</a>     
+🔫 <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a>      🌟<a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
 
 Call Alerts from @marketingalerts
 `;
@@ -70,9 +71,8 @@ ${await listoftgcalls(commandDetail,tokenLogs.calls)}
 <b>🚀 Token :</b>  $${commandDetail.tokenName} (${commandDetail.tokenSymbol})
 <code>${commandDetail.tokenAddress}</code>
 
-📈 <a href="${commandDetail.url}">Chart</a> 
-    
-⭐ <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a>      🌟<a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
+📈 <a href="${commandDetail.url}">Chart</a>     
+🔫 <a href="https://t.me/MaestroSniperBot?start=${commandDetail.tokenAddress}">Maestro</a>      🌟<a href="https://t.me/MaestroProBot?start=${commandDetail.tokenAddress}">MaestroPro</a> 
 
 Call Alerts from @marketingalerts
 `;
@@ -125,7 +125,7 @@ Call Alerts from @marketingalerts
     const  getAlphaCount= (calls : any) => {
 
 
-        console.log("********************* IN Get Alpha Count Method ")
+      //console.log("********************* IN Get Alpha Count Method ")
          let disp = 0;
         for (var i = 0; i < calls.length; i++) {
  
