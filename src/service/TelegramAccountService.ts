@@ -235,7 +235,7 @@ class TelegramAccountService {
                     channelsCallCount = element.calls;
                 }
                 if (Number(element.isAlpha) === 1) {
-                    alphaCallsCount += element.calls;
+                    alphaCallsCount ++;
                 }
             });
 
