@@ -48,15 +48,18 @@ class TelegramAccountService {
 
 
         try {
-            const dialogs = await this.client.getDialogs();
-
-
-
+            const dialogs = await this.client.getDialogs(); 
             dialogs.forEach((element: any) => {
 
 
                 console.log(element.entity.username);
                 console.log(element.entity.title);
+
+                let alpha = this.alphaChannels.includes(element?.entity?.username);
+
+                if(!element.entity.username){
+                    alpha = this.alphaChannels.includes(element?.entity?.title);
+                }
 
                 if (element.entity?.className === 'Channel') {
                     if (Number(element.dialog.peer?.channelId)
@@ -68,7 +71,7 @@ class TelegramAccountService {
                             name: element?.entity?.username,
                             title: element?.entity?.title,
                             id: Number(element.dialog.peer?.channelId),
-                            isAlpha: this.alphaChannels.includes(element?.name)
+                            isAlpha: alpha
                         })
                     }
                 } else if (element.entity?.className === 'Chat' && (this.channels.includes(element?.entity?.username) || this.channels.includes(element?.entity?.title)
@@ -79,7 +82,7 @@ class TelegramAccountService {
                         name: element?.entity?.title,
                         title: element?.entity?.title,
                         id: Number(element.entity?.id),
-                        isAlpha: this.alphaChannels.includes(element?.name)
+                        isAlpha: alpha
                     })
 
 
